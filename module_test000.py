@@ -1,6 +1,6 @@
 import hashmap
 
-#new()
+new()
 
 print aMap
 
