@@ -5,4 +5,3 @@ class MyStuff(object):
 
     def apple(self):
         print "I AM CLASSY APPLES!"
-That looks complicated compared to modules, and the
