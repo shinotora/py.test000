@@ -1,0 +1,62 @@
+大変急で申し訳ございませんが01のラックスイッチにてcriticalなバグが見つかった為緊急
+Version Up作業を実施させて頂きます。
+台数が多い為複数回に分けて実施させて頂きます。
+第1回目 11/26 9:00-18:00　
+第2回目 12/03 9:00-18:00　
+ラック単位で作業を実施します。作業中VM,物理サーバに対して瞬断(~5秒)が2回発生致します。
+ご迷惑おかけしますが宜しくお願い致します。
+
+My mobile number has been changed to the following: +81 50-5578-0798
+Please erase the old one and save this number instead.
+
+
+①41台 Dell R410 L5520 x 2(16コア) 64GBメモリ 1.2TBディスク
+41*16コア=656
+
+②78台 IBM x3530M4 E5-2430L x 2(24コア) 96GBメモリ 1.2TBディスク
+78*24コア＝1872
+
+
+Address         Age        Hardware Addr   State      Type  Interface
+10.32.121.140   00:25:23   40f2.e96a.1d00  Dynamic    ARPA  Bundle-Ether4.61
+
+採用理由
+	Networkのスキルは実施して頂く業務に対して問題無いと考えられた
+	真摯な態度で人柄もよくコミュニケーションスキルも問題無く感じられた
+	総合的に即戦力として期待出来た
+
+面談FB
+	新しい事への取り組みに抵抗が無く積極的に自ら行いたい姿勢が感じられた
+	経験は少ないが確実に仕事をこなして来た感じが有り質問に対しても的確に返答出来ていた
+	
+6FG8WN1,4VG8WN1,BQG8WN1
+
+dnsmasq04  >>> dnsmasq  >> 4台に
+
+ltm snat snat_v4_test {
+    origins {
+        10.64.0.0/11 { }
+        10.97.0.0/16 { }
+    }
+    snatpool /Common/snat_v4_test
+}
+
+ltm snatpool snat_v4_test {
+    members {
+        27.133.221.1
+    }
+}
+
+load sys ucs PGLB00ASVLB000_20151130.ucs no-license
+load sys ucs PGLB00ASVLB001_20151130.ucs no-license
+
+
+ 
+set security policies from-zone trust to-zone untrust policy trust-to-untrust_1 match source-address any-ipv6
+set security policies from-zone trust to-zone untrust policy trust-to-untrust_1 match destination-address any-ipv6
+set security policies from-zone trust to-zone untrust policy trust-to-untrust_1 match application junos-icmp6-all
+set security policies from-zone trust to-zone untrust policy trust-to-untrust_1 then permit
+
+
+
+
